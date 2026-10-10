@@ -2,6 +2,8 @@
 
 An editorial, client-side web application for reading Markdown documents with refined typography, GitHub-Flavored Markdown (GFM) support, and privacy preservation.
 
+**Live Application:** [https://markdown-viewer-kappa-drab.vercel.app](https://markdown-viewer-kappa-drab.vercel.app/)
+
 ---
 
 ## 1. Key Principles & Design Decisions
