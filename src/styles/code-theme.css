@@ -1,0 +1,89 @@
+/* Highlight.js Theme Matching Neutral + Steel Indigo Palette */
+
+/* Light Mode Syntax Highlighting */
+:root {
+  --syntax-keyword: #a626a4;
+  --syntax-function: #4078f2;
+  --syntax-string: #50a14f;
+  --syntax-number: #986801;
+  --syntax-comment: #9e9e9a;
+  --syntax-variable: #e45649;
+  --syntax-tag: #e45649;
+  --syntax-attr: #986801;
+  --syntax-type: #c18401;
+}
+
+/* Dark Mode Syntax Highlighting */
+[data-theme="dark"] {
+  --syntax-keyword: #d2a8ff;
+  --syntax-function: #79c0ff;
+  --syntax-string: #7ee787;
+  --syntax-number: #ffa657;
+  --syntax-comment: #7d8590;
+  --syntax-variable: #ff7b72;
+  --syntax-tag: #7ee787;
+  --syntax-attr: #79c0ff;
+  --syntax-type: #ffa657;
+}
+
+.hljs {
+  color: var(--text-primary);
+  background: transparent;
+}
+
+.hljs-keyword,
+.hljs-selector-tag,
+.hljs-built_in {
+  color: var(--syntax-keyword);
+  font-weight: 500;
+}
+
+.hljs-function,
+.hljs-title,
+.hljs-title.class_,
+.hljs-title.function_ {
+  color: var(--syntax-function);
+  font-weight: 500;
+}
+
+.hljs-string,
+.hljs-regexp,
+.hljs-addition {
+  color: var(--syntax-string);
+}
+
+.hljs-number,
+.hljs-literal {
+  color: var(--syntax-number);
+}
+
+.hljs-comment,
+.hljs-quote {
+  color: var(--syntax-comment);
+  font-style: italic;
+}
+
+.hljs-variable,
+.hljs-template-variable,
+.hljs-deletion {
+  color: var(--syntax-variable);
+}
+
+.hljs-tag,
+.hljs-name {
+  color: var(--syntax-tag);
+}
+
+.hljs-attr,
+.hljs-attribute {
+  color: var(--syntax-attr);
+}
+
+.hljs-type,
+.hljs-params {
+  color: var(--syntax-type);
+}
+
+.hljs-meta {
+  color: var(--text-muted);
+}

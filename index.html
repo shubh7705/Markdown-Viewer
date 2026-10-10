@@ -1,0 +1,38 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Markdown Viewer — Editorial Markdown Reader</title>
+    <meta
+      name="description"
+      content="A fast, clean, client-side web application for reading Markdown documents with refined typography, GitHub-Flavored Markdown support, and local privacy."
+    />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <!-- Zero-flash theme initialization script executed before first paint -->
+    <script>
+      (function () {
+        try {
+          var stored = localStorage.getItem('mdv_theme');
+          var prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+          var theme = stored === 'dark' || (!stored && prefersDark) ? 'dark' : 'light';
+          document.documentElement.setAttribute('data-theme', theme);
+          if (theme === 'dark') {
+            document.documentElement.classList.add('dark');
+          }
+          var settingsRaw = localStorage.getItem('mdv_settings');
+          if (settingsRaw) {
+            var settings = JSON.parse(settingsRaw);
+            if (settings.fontSize) document.documentElement.setAttribute('data-font-size', settings.fontSize);
+            if (settings.readingWidth) document.documentElement.setAttribute('data-reading-width', settings.readingWidth);
+            if (settings.bodyFont) document.documentElement.setAttribute('data-body-font', settings.bodyFont);
+          }
+        } catch (e) {}
+      })();
+    </script>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/src/main.tsx"></script>
+  </body>
+</html>

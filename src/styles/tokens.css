@@ -1,0 +1,161 @@
+/* Design Tokens - Markdown Viewer */
+:root {
+  /* Color Palette - Light Mode (Warm Off-White & Deep Ink) */
+  --bg-app: #fbfbf9;
+  --bg-surface: #f4f4f0;
+  --bg-surface-hover: #ecece7;
+  --bg-surface-active: #e5e5de;
+  --bg-code: #f0f0eb;
+  --bg-overlay: rgba(251, 251, 249, 0.88);
+  --bg-modal: #ffffff;
+  --bg-callout: #f5f5f1;
+
+  --text-primary: #1c1d21;
+  --text-secondary: #575965;
+  --text-muted: #848794;
+  --text-inverse: #fbfbf9;
+
+  --border-subtle: #e2e2dc;
+  --border-strong: #c8c8bd;
+
+  /* Restrained Single Accent: Refined Steel Indigo */
+  --accent: #3b5bdb;
+  --accent-hover: #2f49b0;
+  --accent-subtle: rgba(59, 91, 219, 0.08);
+  --accent-subtle-hover: rgba(59, 91, 219, 0.14);
+  --accent-text: #ffffff;
+  --focus-ring: #3b5bdb;
+
+  /* Semantic Feedback (Restrained) */
+  --feedback-success: #2b8a3e;
+  --feedback-success-bg: #ebfbee;
+  --feedback-warning: #d97706;
+  --feedback-warning-bg: #fffbeb;
+  --feedback-danger: #c92a2a;
+  --feedback-danger-bg: #fff5f5;
+
+  /* Shadows (Subtle, crisp, no heavy blur) */
+  --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.05);
+  --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.06);
+  --shadow-dropdown: 0 8px 24px rgba(0, 0, 0, 0.08);
+
+  /* Typography */
+  --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+  --font-serif: 'Source Serif 4', Georgia, 'Times New Roman', serif;
+  --font-mono: 'JetBrains Mono', SFMono-Regular, Menlo, Monaco, Consolas, 'Liberation Mono', monospace;
+
+  /* Type Scale */
+  --text-xs: 0.75rem;    /* 12px */
+  --text-sm: 0.8125rem;  /* 13px */
+  --text-base: 0.9375rem;/* 15px UI base */
+  --text-lg: 1.0625rem;  /* 17px Body base */
+  --text-xl: 1.25rem;    /* 20px */
+  --text-2xl: 1.5rem;    /* 24px */
+  --text-3xl: 2rem;      /* 32px */
+
+  /* Reading Body Scale (Adjustable via data-font-size) */
+  --reading-font-size: 17px;
+  --reading-line-height: 1.72;
+  --reading-max-width: 68ch;
+
+  /* 4px Base Spacing Scale */
+  --space-0-5: 2px;
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 12px;
+  --space-4: 16px;
+  --space-5: 20px;
+  --space-6: 24px;
+  --space-8: 32px;
+  --space-10: 40px;
+  --space-12: 48px;
+  --space-16: 64px;
+
+  /* Radii (Subtle, max 8-10px) */
+  --radius-xs: 3px;
+  --radius-sm: 4px;
+  --radius-md: 6px;
+  --radius-lg: 8px;
+  --radius-pill: 9999px;
+
+  /* Transitions (Small purposeful motion) */
+  --transition-fast: 150ms cubic-bezier(0.16, 1, 0.3, 1);
+  --transition-normal: 200ms cubic-bezier(0.16, 1, 0.3, 1);
+
+  /* Dimensions */
+  --header-height: 48px;
+  --sidebar-width: 260px;
+}
+
+[data-theme="dark"] {
+  /* Color Palette - Dark Mode (Soft Charcoal, not pitch black) */
+  --bg-app: #151618;
+  --bg-surface: #1b1c20;
+  --bg-surface-hover: #222429;
+  --bg-surface-active: #2a2c32;
+  --bg-code: #1e2025;
+  --bg-overlay: rgba(21, 22, 24, 0.88);
+  --bg-modal: #1e2025;
+  --bg-callout: #1b1c20;
+
+  --text-primary: #ededed;
+  --text-secondary: #a0a2ab;
+  --text-muted: #6b6e79;
+  --text-inverse: #151618;
+
+  --border-subtle: #292b30;
+  --border-strong: #3d4048;
+
+  /* Restrained Accent in Dark Mode (Shifted for AA contrast on charcoal) */
+  --accent: #748ffc;
+  --accent-hover: #91a7ff;
+  --accent-subtle: rgba(116, 143, 252, 0.12);
+  --accent-subtle-hover: rgba(116, 143, 252, 0.18);
+  --accent-text: #151618;
+  --focus-ring: #748ffc;
+
+  /* Semantic Feedback */
+  --feedback-success: #51cf66;
+  --feedback-success-bg: #132717;
+  --feedback-warning: #fcc419;
+  --feedback-warning-bg: #2d2414;
+  --feedback-danger: #ff6b6b;
+  --feedback-danger-bg: #2d1416;
+
+  /* Shadows */
+  --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.4);
+  --shadow-md: 0 4px 14px rgba(0, 0, 0, 0.45);
+  --shadow-dropdown: 0 8px 24px rgba(0, 0, 0, 0.55);
+}
+
+/* User Preferences / Settings Overrides */
+[data-font-size="small"] {
+  --reading-font-size: 15px;
+  --reading-line-height: 1.68;
+}
+
+[data-font-size="medium"] {
+  --reading-font-size: 17px;
+  --reading-line-height: 1.72;
+}
+
+[data-font-size="large"] {
+  --reading-font-size: 19px;
+  --reading-line-height: 1.75;
+}
+
+[data-reading-width="narrow"] {
+  --reading-max-width: 66ch;
+}
+
+[data-reading-width="wide"] {
+  --reading-max-width: 86ch;
+}
+
+[data-body-font="serif"] {
+  --reading-font-family: var(--font-serif);
+}
+
+[data-body-font="sans"] {
+  --reading-font-family: var(--font-sans);
+}
