@@ -137,7 +137,7 @@ $$\\mathcal{L}(\\theta) = -\\frac{1}{B \\times T} \\sum_{b=1}^{B} \\log P(x)$$
     expect(html).toContain('class="katex-display"');
   });
 
-  it('renders Mermaid diagram cards with diagram canvas and source toggle', () => {
+  it('renders Mermaid diagram cards with diagram canvas, fullscreen button, and source toggle', () => {
     const md = `
 \`\`\`mermaid
 graph TD
@@ -148,6 +148,8 @@ graph TD
 
     expect(html).toContain('class="mermaid-diagram-card"');
     expect(html).toContain('class="mermaid-render-target"');
+    expect(html).toContain('class="mermaid-fullscreen-btn"');
+    expect(html).toContain('Full Screen');
     expect(html).toContain('class="mermaid-toggle-view-btn"');
     expect(html).toContain('data-raw-mermaid');
   });

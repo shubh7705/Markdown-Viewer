@@ -1,6 +1,7 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import mermaid from 'mermaid';
 import type { Theme } from '../lib/types';
+import { MermaidFullscreenModal } from './MermaidFullscreenModal';
 
 interface DocumentRendererProps {
   html: string;
@@ -9,6 +10,10 @@ interface DocumentRendererProps {
 
 export const DocumentRenderer: React.FC<DocumentRendererProps> = ({ html, theme }) => {
   const containerRef = useRef<HTMLElement>(null);
+  const [fullscreenData, setFullscreenData] = useState<{
+    svgHtml: string;
+    rawCode: string;
+  } | null>(null);
 
   // Initialize and render Mermaid diagrams
   useEffect(() => {
@@ -63,7 +68,7 @@ export const DocumentRenderer: React.FC<DocumentRendererProps> = ({ html, theme 
     };
   }, [html, theme]);
 
-  // Delegated click handler for copy buttons and mermaid view toggle
+  // Delegated click and double-click handler for copy, toggle view, and full screen
   useEffect(() => {
     const container = containerRef.current;
     if (!container) return;
@@ -71,6 +76,23 @@ export const DocumentRenderer: React.FC<DocumentRendererProps> = ({ html, theme 
     const handleContainerClick = async (event: MouseEvent) => {
       const target = event.target as HTMLElement | null;
       if (!target) return;
+
+      // Fullscreen button click
+      const fullscreenBtn = target.closest<HTMLButtonElement>('.mermaid-fullscreen-btn');
+      if (fullscreenBtn) {
+        const card = fullscreenBtn.closest<HTMLElement>('.mermaid-diagram-card');
+        if (card) {
+          const svgEl = card.querySelector<SVGElement>('.mermaid-render-target svg');
+          if (svgEl) {
+            const rawCode = decodeURIComponent(card.getAttribute('data-raw-mermaid') || '');
+            setFullscreenData({
+              svgHtml: svgEl.outerHTML,
+              rawCode,
+            });
+          }
+        }
+        return;
+      }
 
       // Toggle Mermaid source code / diagram view
       const toggleViewBtn = target.closest<HTMLButtonElement>('.mermaid-toggle-view-btn');
@@ -122,18 +144,56 @@ export const DocumentRenderer: React.FC<DocumentRendererProps> = ({ html, theme 
       }
     };
 
+    // Double-click canvas to enter full screen
+    const handleContainerDblClick = (event: MouseEvent) => {
+      const target = event.target as HTMLElement | null;
+      if (!target) return;
+
+      const canvas = target.closest<HTMLElement>('.mermaid-canvas');
+      if (canvas) {
+        const card = canvas.closest<HTMLElement>('.mermaid-diagram-card');
+        if (card) {
+          const svgEl = card.querySelector<SVGElement>('.mermaid-render-target svg');
+          if (svgEl) {
+            const rawCode = decodeURIComponent(card.getAttribute('data-raw-mermaid') || '');
+            setFullscreenData({
+              svgHtml: svgEl.outerHTML,
+              rawCode,
+            });
+          }
+        }
+      }
+    };
+
     container.addEventListener('click', handleContainerClick);
-    return () => container.removeEventListener('click', handleContainerClick);
+    container.addEventListener('dblclick', handleContainerDblClick);
+    return () => {
+      container.removeEventListener('click', handleContainerClick);
+      container.removeEventListener('dblclick', handleContainerDblClick);
+    };
   }, [html]);
 
   return (
-    <main className="reading-main" id="reading-main-content">
-      <article
-        ref={containerRef}
-        className="markdown-body document-article"
-        id="markdown-article"
-        dangerouslySetInnerHTML={{ __html: html }}
-      />
-    </main>
+    <>
+      <main className="reading-main" id="reading-main-content">
+        <article
+          ref={containerRef}
+          className="markdown-body document-article"
+          id="markdown-article"
+          dangerouslySetInnerHTML={{ __html: html }}
+        />
+      </main>
+
+      {fullscreenData && (
+        <MermaidFullscreenModal
+          key={fullscreenData.svgHtml.slice(0, 40)}
+          isOpen={!!fullscreenData}
+          svgHtml={fullscreenData.svgHtml}
+          rawCode={fullscreenData.rawCode}
+          onClose={() => setFullscreenData(null)}
+        />
+      )}
+    </>
   );
 };
+

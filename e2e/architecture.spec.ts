@@ -60,4 +60,46 @@ test('verify math equations and mermaid diagram rendering with ARCHITECTURE.md',
   await toggleBtn.click();
   await expect(mermaidCard.locator('.mermaid-canvas')).toBeVisible();
   await expect(svg).toBeVisible();
+
+  // 5. Test "Full Screen" button and Zooming
+  const fullscreenBtn = mermaidCard.locator('.mermaid-fullscreen-btn');
+  await expect(fullscreenBtn).toBeVisible();
+  await fullscreenBtn.click();
+
+  // Verify fullscreen modal is open
+  const modal = page.locator('.diagram-fullscreen-modal');
+  await expect(modal).toBeVisible();
+
+  // Verify zoom indicator starts at 100%
+  const scaleIndicator = modal.locator('.diagram-scale-indicator');
+  await expect(scaleIndicator).toHaveText('100%');
+
+  // Test Zoom In button
+  const zoomInBtn = modal.locator('button[aria-label="Zoom in"]');
+  await zoomInBtn.click();
+  await expect(scaleIndicator).toHaveText('125%');
+
+  await zoomInBtn.click();
+  await expect(scaleIndicator).toHaveText('156%');
+
+  // Capture screenshot of full screen diagram with zoom
+  await page.screenshot({
+    path: `${ARTIFACT_DIR}/architecture_mermaid_fullscreen_zoom.png`,
+    fullPage: false,
+  });
+
+  // Test Zoom Out button
+  const zoomOutBtn = modal.locator('button[aria-label="Zoom out"]');
+  await zoomOutBtn.click();
+  await expect(scaleIndicator).toHaveText('125%');
+
+  // Test Reset button
+  const resetBtn = modal.locator('button[aria-label="Reset view"]');
+  await resetBtn.click();
+  await expect(scaleIndicator).toHaveText('100%');
+
+  // Test Escape key to close modal
+  await page.keyboard.press('Escape');
+  await expect(modal).not.toBeVisible();
 });
+

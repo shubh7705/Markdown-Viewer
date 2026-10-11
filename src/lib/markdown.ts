@@ -93,6 +93,12 @@ export function renderMarkdown(markdownText: string): RenderResult {
       <span>Mermaid Diagram</span>
     </span>
     <div class="mermaid-actions">
+      <button class="mermaid-fullscreen-btn" type="button" aria-label="Full screen diagram" title="Full screen diagram with zoom & pan">
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <path d="M8 3H5a2 2 0 0 0-2 2v3m18 0V5a2 2 0 0 0-2-2h-3m0 18h3a2 2 0 0 0 2-2v-3M3 16v3a2 2 0 0 0 2 2h3"/>
+        </svg>
+        <span>Full Screen</span>
+      </button>
       <button class="mermaid-toggle-view-btn" type="button" aria-label="Toggle diagram and source code">
         <span>View Code</span>
       </button>
@@ -105,7 +111,7 @@ export function renderMarkdown(markdownText: string): RenderResult {
       </button>
     </div>
   </div>
-  <div class="mermaid-canvas">
+  <div class="mermaid-canvas" title="Double-click or click Full Screen to zoom and pan">
     <div class="mermaid-render-target">
       <div class="mermaid-loading-state">Rendering diagram...</div>
     </div>

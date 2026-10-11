@@ -38,11 +38,12 @@ Markdown Viewer prioritizes the rendered text as the focal point of the interfac
    - High-performance, client-side typesetting for both inline (`$d_{\text{model}}$`, `$d_k = d_{\text{model}} / H = 256 / 8$`) and display math (`$$\text{Attention}(Q, K, V) = \text{softmax}\left(\frac{QK^T}{\sqrt{d_k}}\right)V$$`).
    - Clean horizontal scrolling on mobile/narrow viewports for long mathematical equations.
    - Whitelisted MathML and KaTeX markup in DOMPurify sanitization.
-4. **Mermaid Diagram Viewer:**
-   - Seamlessly renders Mermaid diagrams (`graph TD`, `sequenceDiagram`, `classDiagram`, `stateDiagram-v2`, `erDiagram`, etc.).
-   - Interactive viewer card with a header toolbar allowing readers to toggle between the rendered interactive diagram and the raw Mermaid definition.
-   - Theme-adaptive diagram theming (`dark` vs `neutral`) syncing seamlessly with light and dark mode toggles.
-   - Copy-to-clipboard button for diagram source code.
+4. **Mermaid Diagram & Chart Viewer:**
+   - Seamlessly renders Mermaid diagrams and charts (`graph TD`, `sequenceDiagram`, `classDiagram`, `stateDiagram-v2`, `erDiagram`, gantt, pie charts, etc.).
+   - **Fullscreen Interactive Zoom & Pan:** Readers can click "Full Screen" or double-click any diagram to expand it into an immersive full-screen viewer.
+   - **Smooth Zoom & Pan:** Supports mouse wheel zooming centered on the cursor, touch pinch-to-zoom on mobile, click-and-drag panning, zoom level percentage stepper (`+` / `-`), and one-click `Reset` to fit.
+   - **Keyboard Navigation in Fullscreen:** `+`/`-` to zoom in/out, `0` to reset zoom, Arrow keys to pan, and `Esc` to close.
+   - **Code & Theme Sync:** Toggle between the rendered diagram and raw source code, copy source with one click, and automatic theme adaptation (`dark` vs `neutral`).
    - Graceful inline error fallback preserving raw code if diagram syntax is invalid.
 5. **Graceful Relative Image Fallback:**
    - Detects relative image paths (which cannot resolve in a browser without local filesystem access) and presents an elegant placeholder badge showing the alt text and target path rather than a broken image icon.
@@ -89,6 +90,7 @@ markdown-viewer/
 │   │   ├── TopBar.tsx        # Slim navigation bar with reading controls
 │   │   ├── TableOfContents.tsx # Sticky sidebar and mobile drawer
 │   │   ├── DocumentRenderer.tsx# Sanitized article container with KaTeX & Mermaid rendering
+│   │   ├── MermaidFullscreenModal.tsx # Interactive fullscreen diagram viewer with zoom & pan
 │   │   ├── EmptyState.tsx    # Minimal, calm drop zone
 │   │   ├── DropOverlay.tsx   # Fullscreen drag-over indicator
 │   │   ├── PasteModal.tsx    # Raw markdown text paste modal
